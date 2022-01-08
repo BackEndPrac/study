@@ -17,25 +17,18 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
 
-//    @GetMapping("/add")
-//    public String addMember(@ModelAttribute Member member) {
-//        return "member/addMember";
-//    }
-
-//    @PostMapping("/add")
-//    public String enrollmentMember(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
-//        if(bindingResult.hasErrors()) {
-//            return "member/addMember";
-//        }
-//        memberService.save(member);
-//        return "redirect:/";
-//    }
-
-    @RequestMapping("/add")
-    public String addMember(Member member) {
-        memberService.addMember(member);
-        log.info(member.toString());
+    @GetMapping("/add")
+    public String addMember(@ModelAttribute Member member) {
         return "member/addMember";
+    }
+
+    @PostMapping("/add")
+    public String enrollmentMember(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "member/addMember";
+        }
+        memberService.addMember(member);
+        return "redirect:/";
     }
 
 }

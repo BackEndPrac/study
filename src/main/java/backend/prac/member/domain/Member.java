@@ -18,8 +18,15 @@ public class Member {
     @GeneratedValue
     private Long id;
 
+    @NotEmpty
     private String username;
+
+    @NotEmpty
     private String nickname;
+
+    @NotEmpty
     private String loginId; // 로그인 id
+
+    @NotEmpty
     private String password; // 비밀번호
 }

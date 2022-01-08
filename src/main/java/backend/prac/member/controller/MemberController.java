@@ -12,8 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequiredArgsConstructor
 @Log4j2
+@RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
 
@@ -31,9 +31,11 @@ public class MemberController {
 //        return "redirect:/";
 //    }
 
-    @PostMapping("/add")
-    public String addMember(@RequestBody Member member) {
+    @RequestMapping("/add")
+    public String addMember(Member member) {
         memberService.addMember(member);
+        log.info(member.toString());
         return "member/addMember";
     }
+
 }

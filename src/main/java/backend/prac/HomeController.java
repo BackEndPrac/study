@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
 
@@ -22,10 +24,10 @@ public class HomeController {
         return "index";
     }
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
-        Member save = memberService.save(new Member(null, "첫손님", "일등", "qwer123", "test1!"));
-        log.info("save={}", save.toString());
+//        Member save = memberService.save(new Member(null, "첫손님", "일등", "qwer123", "test1!"));
+//        log.info("save={}", save.toString());
 
     }
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>홈페이지</title>
+    <style>
+        .container {
+            height: 95vh;
+        }
+
+        #container_title {
+            font-size: 50px;
+            text-align: center;
+        }
+
+        .c {
+            display: flex;
+            justify-content: center;
+        }
+
+        .in {
+            display: flex;
+        }
+
+        .inInput {
+        }
+
+        .input {
+            width: 200px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="c">
+    <div class="container">
+        <div id="container_title">
+            <span>홈페이지</span>
+        </div>
+        <div class="in">
+            <form>
+                <div class="inInput" id="inAdd">
+                    <input class="input" th:onclick="|location.href='@{/add}'|" type="button"
+                           value="회원가입"
+                    />
+                </div>
+                <div class="inInput" id="login">
+                    <input class="input" type="button" value="로그인"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

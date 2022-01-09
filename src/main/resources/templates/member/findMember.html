@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .error_class{
+            border-color:red;
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<h1>회원찾기</h1>
+<form  th:action th:object="${member}" method="post">
+
+    <div>ID
+        <input  type = "text" th:field="*{loginId}"
+                th:errorclass="error_class"
+                name="loginId"/>
+        <div class = "error_class" th:errors="${member.loginId}" >da</div>
+    </div>
+    <div>password
+        <input type="password" th:field="${member.password}"
+               th:errorclass="error_class"
+               name="password"/>
+        <div class = "error_class"th:errors="${member.password}" ></div>
+    </div>
+    <div>이름
+        <input  type = "text" th:field="${member.username}"
+                th:errorclass="error_class"
+                name="name"/>
+        <div class = "error_class"th:errors="${member.username}" ></div>
+    </div>
+
+    <div>닉네임
+        <input  type = "text" th:field="${member.nickname}"
+                th:errorclass="error_class"
+                name="nickName"/>
+        <div class = "error_class"th:errors="${member.nickname}" ></div>
+    </div>
+    <input type="submit" value="전송"/>
+</form>
+</body>
+</html>

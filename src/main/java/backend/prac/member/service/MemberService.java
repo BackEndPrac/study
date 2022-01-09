@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MemberService {
 
@@ -14,6 +16,10 @@ public class MemberService {
 
     public void addMember(Member member) {
         memberRepository.save(member);
+    }
+
+    public Optional<Member> findMember(Long id) {
+        return memberRepository.findById(id);
     }
 
 }

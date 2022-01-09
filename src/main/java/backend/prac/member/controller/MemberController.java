@@ -7,9 +7,12 @@ import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @Log4j2
@@ -29,6 +32,13 @@ public class MemberController {
         }
         memberService.addMember(member);
         return "redirect:/";
+    }
+
+    @GetMapping("/members")
+    public String members(Model model) {
+        List<Member> members = memberService.findAll();
+        model.addAttribute("members", members);
+        return "member/memberDetail";
     }
 
 }

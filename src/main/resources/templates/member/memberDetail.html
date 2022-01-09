@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>회원 목록</h1>
+<table border="1px">
+  <tr>
+    <td>이름</td>
+    <td>ID</td>
+    <td>비밀번호</td>
+    <td>닉네임</td>
+  </tr>
+  <tr th:each="member : ${members}">
+    <td th:text="${member.username}">사용자 이름</td>
+    <td th:text="${member.loginId}">사용자 아이디</td>
+    <td th:text="${member.password}">사용자 비밀번호</td>
+    <td th:text="${member.nickname}">사용자 닉네임</td>
+  </tr>
+
+</table>
+
+</body>
+</html>

@@ -47,6 +47,11 @@
                 <div class="inInput" id="login">
                     <input class="input" type="button" value="로그인"/>
                 </div>
+                <div class="inInput" id="member_detail">
+                    <input class="input" type="button"
+                           th:onclick="|location.href='@{/members}'|"
+                           value="회원목록보기"/>
+                </div>
             </form>
         </div>
 

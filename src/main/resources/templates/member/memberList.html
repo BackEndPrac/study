@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<table>
+    <thead>
+    <tr>
+        <th class="one wide">ID</th>
+        <th class="ten wide">password</th>
+        <th class="two wide">이름</th>
+        <th class="three wide">닉네임</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!-- CONTENTS !-->
+    <tr th:each="member : ${members}">
+        <td>
+            <span th:text="${member.loginId}"></span>
+        </td>
+        <td>
+            <a th:href="@{'/post/' + ${member.loginId}}">
+                <span th:text="${member.username}"></span>
+            </a>
+        </td>
+        <td>
+            <span th:text="${member.nickname}"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

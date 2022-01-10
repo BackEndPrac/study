@@ -18,7 +18,7 @@
         <input  type = "text" th:field="*{loginId}"
                 th:errorclass="error_class"
                 name="loginId"/>
-        <div class = "error_class" th:errors="${member.loginId}" >da</div>
+        <div class = "error_class" th:errors="${member.loginId}" ></div>
     </div>
     <div>password
         <input type="password" th:field="${member.password}"

@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -34,22 +35,35 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @PutMapping("/find")
-    public Optional<Member> editMemberInfo(@RequestParam Long id, @RequestBody Member member) {
-        Optional<Member> m = memberService.findMember(id);
 
-        m.ifPresent(selectMember -> {
-            selectMember.setId(member.getId());
-            selectMember.setLoginId(member.getLoginId());
-            selectMember.setUsername(member.getUsername());
-            selectMember.setNickname(member.getNickname());
-            selectMember.setPassword(member.getPassword());
+    @GetMapping("/member/{no}")
+    public String detail(@PathVariable("id") Long id, Model model) {
+        Member member = memberService.(no);
 
-            memberService.addMember(selectMember);
-        });
-        log.info(m.toString());
+        model.addAttribute("boardDto", boardDTO);
+        return "board/detail.html";
+    }
 
-        return m;
+    @GetMapping("/post/edit/{no}")
+    public String edit(@PathVariable("no") Long no, Model model) {
+        BoardDto boardDTO = boardService.getPost(no);
+
+        model.addAttribute("boardDto", boardDTO);
+        return "board/update.html";
+    }
+
+    @PutMapping("/post/edit/{no}")
+    public String update(BoardDto boardDTO) {
+        boardService.savePost(boardDTO);
+
+        return "redirect:/";
+    }
+
+    @DeleteMapping("/post/{no}")
+    public String delete(@PathVariable("no") Long no) {
+        boardService.deletePost(no);
+
+        return "redirect:/";
     }
 
 }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+
+<!-- 수정/삭제 -->
+<form th:action="@{'/post/edit/' + ${member.loginId}}" method="post">
+    <input type="hidden" name="_method" value="put"/>
+    ID : <input type="hidden" name="id" th:value="${member.loginId}"/>
+    password : <input type="text" name="title" th:value="${member.password}"> <br>
+    이름 : <input type="text" name="writer" th:value="${member.username}"> <br>
+    닉네임 : <input type="text" name="writer" th:value="${member.nickname}"> <br>
+    <input type="submit" value="수정">
+</form>
+</body>
+</html>

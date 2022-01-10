@@ -34,38 +34,10 @@ public class MemberController {
         return "redirect:/";
     }
 
-//    @PostMapping("/find")
-//    public String editMemberInfo(@PathVariable Long id, Member member) {
-//        Optional<Member> m = memberService.findMember(id);
-//
-//        m.ifPresent(selectMember -> {
-//            selectMember.setId(member.getId());
-//            selectMember.setLoginId(member.getLoginId());
-//            selectMember.setUsername(member.getUsername());
-//            selectMember.setNickname(member.getNickname());
-//            selectMember.setPassword(member.getPassword());
-//
-//        });
-//        return "member/findMember";
-//    }
-
     @GetMapping("/members")
     public String list(Model model) {
         List<Member> memberList = memberService.memberList();
         model.addAttribute("members", memberList);
         return "member/memberList";
-    }
-
-//    @GetMapping("/detail/{id}")
-//    public String detail(@PathVariable("id") Long id, Model model) {
-//        Optional<Member> member = memberService.findMember(id);
-//        model.addAttribute("post", member);
-//        return "memberList";
-//    }
-
-    @PostMapping("/post/detail/{id}")
-    public String update(Member member) {
-        memberService.addMember(member);
-        return "redirect:/";
     }
 }

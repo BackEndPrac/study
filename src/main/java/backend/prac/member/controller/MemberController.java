@@ -38,30 +38,30 @@ public class MemberController {
 
     @GetMapping("/member/{no}")
     public String detail(@PathVariable("id") Long id, Model model) {
-        Member member = memberService.(no);
+        Optional<Member> member = memberService.findMember(id);
 
-        model.addAttribute("boardDto", boardDTO);
-        return "board/detail.html";
+        model.addAttribute("member", member);
+        return "member/detail";
     }
 
-    @GetMapping("/post/edit/{no}")
-    public String edit(@PathVariable("no") Long no, Model model) {
-        BoardDto boardDTO = boardService.getPost(no);
+    @GetMapping("/member/edit/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
+        Optional<Member> member = memberService.findMember(id);
 
-        model.addAttribute("boardDto", boardDTO);
-        return "board/update.html";
+        model.addAttribute("member", member);
+        return "member/update";
     }
 
-    @PutMapping("/post/edit/{no}")
-    public String update(BoardDto boardDTO) {
-        boardService.savePost(boardDTO);
+    @PutMapping("/member/edit/{id}")
+    public String update(Member member) {
+        memberService.addMember(member);
 
         return "redirect:/";
     }
 
-    @DeleteMapping("/post/{no}")
-    public String delete(@PathVariable("no") Long no) {
-        boardService.deletePost(no);
+    @DeleteMapping("/member/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        memberService.deleteMember(id);
 
         return "redirect:/";
     }

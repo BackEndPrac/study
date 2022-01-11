@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+
+<!-- 수정/삭제 -->
+<form th:action="@{'/member/edit/' + ${member.id}}" method="post">
+    <input type="hidden" name="_method" value="put"/>
+    ID : <input type="text" name="id" th:value="${member.loginId}"/> <br>
+    password : <input type="password" name="password" th:value="${member.password}"> <br>
+    이름 : <input type="text" name="name" th:value="${member.username}"> <br>
+    닉네임 : <input type="text" name="nickname" th:value="${member.nickname}"> <br>
+    <input type="submit" value="수정"> <br>
+
+    <form id="delete-form" th:action="@{'/member/' + ${member.id}}" method="post">
+        <input type="hidden" name="_method" value="delete"/>
+        <button id="delete-btn">삭제</button>
+    </form>
+</form>
+</body>
+</html>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>회원 조회</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<h2 th:text="${member.loginId}">아이디</h2>-->
+<!--<p th:text="${member.username}"></p>-->
+<!--<p th:text="${member.nickname}"></p>-->
+
+<!--&lt;!&ndash; 수정/삭제 &ndash;&gt;-->
+<!--<div>-->
+<!--    <a th:href="@{'/member/edit/' + ${member.id}}">-->
+<!--        <button>수정</button>-->
+<!--    </a>-->
+
+<!--    <form id="delete-form" th:action="@{'/member/' + ${member.id}}" method="post">-->
+<!--        <input type="hidden" name="_method" value="delete"/>-->
+<!--        <button id="delete-btn">삭제</button>-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

@@ -36,9 +36,9 @@ public class MemberController {
     }
 
 
-    @GetMapping("/member/{no}")
+    @GetMapping("/member/{id}")
     public String detail(@PathVariable("id") Long id, Model model) {
-        Optional<Member> member = memberService.findMember(id);
+        Member member = memberService.findMember(id).get();
 
         model.addAttribute("member", member);
         return "member/detail";
@@ -46,20 +46,20 @@ public class MemberController {
 
     @GetMapping("/member/edit/{id}")
     public String edit(@PathVariable("id") Long id, Model model) {
-        Optional<Member> member = memberService.findMember(id);
+        Member member = memberService.findMember(id).get();
 
         model.addAttribute("member", member);
-        return "member/update";
+        return "member/detail";
     }
 
-    @PutMapping("/member/edit/{id}")
+    @PostMapping("/member/edit/{id}")
     public String update(Member member) {
         memberService.addMember(member);
 
         return "redirect:/";
     }
 
-    @DeleteMapping("/member/{id}")
+    @PostMapping("/member/{id}")
     public String delete(@PathVariable("id") Long id) {
         memberService.deleteMember(id);
 

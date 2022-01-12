@@ -15,10 +15,10 @@
 <form  th:action th:object="${member}" method="post">
 
     <div>ID
-        <input  type = "text" th:field="*{loginId}"
+        <input  type = "text" th:field="*{enrollmentId}"
                 th:errorclass="error_class"
                 name="loginId"/>
-        <div class = "error_class" th:errors="${member.loginId}" >da</div>
+        <div class = "error_class" th:errors="${member.enrollmentId}" >da</div>
     </div>
     <div>password
         <input type="password" th:field="${member.password}"

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,8 +18,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void addMember(Member member) {
-        memberRepository.save(member);
+    public Member addMember(Member member) {
+       return memberRepository.save(member);
     }
 
     @Transactional
@@ -30,7 +31,7 @@ public class MemberService {
     public Member update(Long id,Member member){
         Member findMember = memberRepository.getById(id);
         findMember.setNickname(member.getNickname());
-        findMember.setLoginId(member.getLoginId());
+        findMember.setEnrollmentId(member.getEnrollmentId());
         findMember.setUsername(member.getUsername());
 
         System.out.println("findMember = " + findMember);
@@ -39,5 +40,18 @@ public class MemberService {
     @Transactional
     public void deleteMember(Long id) {
         memberRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Member login(String userId, String password) {
+        List<Member> members = memberRepository.findAll();
+        for (Member member : members) {
+            if(member.getEnrollmentId().equals(userId)) {
+                if(member.getPassword().equals(password)){
+                    return member;
+                }
+            }
+        }
+        return null;
     }
 }

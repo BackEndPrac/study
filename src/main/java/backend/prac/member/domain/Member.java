@@ -2,10 +2,7 @@ package backend.prac.member.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @NoArgsConstructor
@@ -18,6 +15,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "MEMBER_ID")
     private Long id;
 
     @NotEmpty
@@ -27,7 +25,8 @@ public class Member {
     private String nickname;
 
     @NotEmpty
-    private String loginId; // 로그인 id
+
+    private String enrollmentId; // 로그인 id
 
     @NotEmpty
     private String password; // 비밀번호

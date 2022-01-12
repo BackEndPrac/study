@@ -1,5 +1,6 @@
 package backend.prac.member.controller;
 
+import backend.prac.member.domain.Login;
 import backend.prac.member.domain.Member;
 import backend.prac.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @Log4j2
@@ -64,5 +69,27 @@ public class MemberController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/login")
+    public String loginForm(@ModelAttribute Login login) {
+        return "login/login";
+    }
+
+    @PostMapping("/login")
+    public String login(@Valid @ModelAttribute Login login, BindingResult bindingResult, HttpServletRequest request) {
+        if(bindingResult.hasErrors()) {
+            return "login/login";
+        }
+        Member member = memberService.login(login.getUserId(), login.getPassword());
+        if(member == null) {
+            return "login/login";
+        }
+        HttpSession session = request.getSession();
+        System.out.println("session = " + session);
+        session.setAttribute("memberId",member);
+        return "redirect:/";
+    }
+
+
 
 }

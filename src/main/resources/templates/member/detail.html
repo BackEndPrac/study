@@ -7,18 +7,18 @@
 <body>
 
 <!-- 수정/삭제 -->
-<form th:action="@{'/member/edit/' + ${member.id}}" method="post">
-    <input type="hidden" name="_method" value="put"/>
-    ID : <input type="text" name="id" th:value="${member.loginId}"/> <br>
-    password : <input type="password" name="password" th:value="${member.password}"> <br>
-    이름 : <input type="text" name="name" th:value="${member.username}"> <br>
-    닉네임 : <input type="text" name="nickname" th:value="${member.nickname}"> <br>
+<form th:action method="post">
+
+    ID : <input type="text"  th:field="${member.loginId}"/> <br>
+    password : <input type="password" th:value="${member.password}" th:field="${member.password}"> <br>
+    이름 : <input type="text"  th:field="${member.username}"> <br>
+    닉네임 : <input type="text"  th:field="${member.nickname}"> <br>
     <input type="submit" value="수정"> <br>
 
-    <form id="delete-form" th:action="@{'/member/' + ${member.id}}" method="post">
-        <input type="hidden" name="_method" value="delete"/>
+
+
         <button id="delete-btn">삭제</button>
-    </form>
+
 </form>
 </body>
 </html>

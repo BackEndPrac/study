@@ -10,10 +10,11 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
 
-    @Autowired
-    MemberRepository memberRepository;
+
+    private final MemberRepository memberRepository;
 
     @Transactional
     public void addMember(Member member) {
@@ -25,6 +26,16 @@ public class MemberService {
         return memberRepository.findById(id);
     }
 
+    @Transactional
+    public Member update(Long id,Member member){
+        Member findMember = memberRepository.getById(id);
+        findMember.setNickname(member.getNickname());
+        findMember.setLoginId(member.getLoginId());
+        findMember.setUsername(member.getUsername());
+
+        System.out.println("findMember = " + findMember);
+        return findMember;
+    }
     @Transactional
     public void deleteMember(Long id) {
         memberRepository.deleteById(id);

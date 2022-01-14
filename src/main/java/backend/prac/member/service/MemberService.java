@@ -1,6 +1,8 @@
 package backend.prac.member.service;
 
+import backend.prac.member.domain.Login;
 import backend.prac.member.domain.Member;
+import backend.prac.member.repository.LoginRepository;
 import backend.prac.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ public class MemberService {
 
 
     private final MemberRepository memberRepository;
+    private final LoginRepository loginRepository;
 
     @Transactional
     public Member addMember(Member member) {
@@ -44,14 +47,27 @@ public class MemberService {
 
     @Transactional
     public Member login(String userId, String password) {
+
         List<Member> members = memberRepository.findAll();
         for (Member member : members) {
             if(member.getEnrollmentId().equals(userId)) {
                 if(member.getPassword().equals(password)){
+
                     return member;
                 }
             }
         }
         return null;
+    }
+
+    @Transactional
+    public Login loginSave(Member member, Login login) {
+        member.setLogin(login);
+        return loginRepository.save(login);
+    }
+
+   @Transactional
+    public void logout(Long id) {
+        loginRepository.deleteById(id);
     }
 }

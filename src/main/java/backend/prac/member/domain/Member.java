@@ -24,8 +24,11 @@ public class Member {
     @NotEmpty
     private String nickname;
 
-    @NotEmpty
+    @OneToOne
+    @JoinColumn(name = "LOGIN_ID")
+    private Login login;
 
+    @NotEmpty
     private String enrollmentId; // 로그인 id
 
     @NotEmpty

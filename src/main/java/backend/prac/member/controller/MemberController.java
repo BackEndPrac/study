@@ -76,7 +76,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute Login login, BindingResult bindingResult, HttpServletRequest request) {
+    public String login(@Valid @ModelAttribute Login login, BindingResult bindingResult, Model model,HttpServletRequest request) {
         if(bindingResult.hasErrors()) {
             return "login/login";
         }
@@ -85,11 +85,24 @@ public class MemberController {
             return "login/login";
         }
         HttpSession session = request.getSession();
-        System.out.println("session = " + session);
+        if(session == null) {
+            return "login/login";
+        }
+        model.addAttribute("member",member);
+        memberService.loginSave(member,login);
         session.setAttribute("memberId",member);
-        return "redirect:/";
+        return "loginHome";
     }
 
-
-
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        Member member = (Member) session.getAttribute("memberId");
+        Login login = member.getLogin();
+        if(session != null) {
+            session.invalidate();
+            memberService.logout(login.getId());
+        }
+        return "redirect:/";
+    }
 }

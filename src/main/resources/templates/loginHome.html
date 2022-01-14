@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1 th:text="${member.nickname}"></h1>
+<form>
+  <input type="button" th:value="로그아웃"
+  th:onclick="|location.href='@{/logout}'|"
+  />
+  <input type="button" th:value="상세보기"
+         th:onclick="|location.href='@{/member/edit/{id}(id=${member.id})}'|"
+  />
+
+</form>
+
+</body>
+</html>

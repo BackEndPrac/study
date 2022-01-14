@@ -1,5 +1,9 @@
 server:
   port: 8000
+  servlet:
+    session:
+      tracking-modes: cookie
+
 
 spring:
   datasource:
@@ -10,3 +14,4 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+
